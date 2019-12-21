@@ -9,9 +9,6 @@ module type RationalType = sig
   val ( /* ) : t -> t -> t
   val ( // ) : t -> t -> t
 
-  val ( /> ) : t -> t -> bool
-  val ( /< ) : t -> t -> bool
-
   val string_of_rational : t -> string
 end
 
@@ -52,14 +49,6 @@ module Rational : RationalType = struct
 
   (* a / (r/s) = a * s/r *)
   let ( // ) a (r, s) = a /* (s, r)
-
-  let ( /> ) a b =
-    let (n', _) = a /- b
-    in n' > 0
-
-  let ( /< ) a b =
-    let (n', _) = a /- b
-    in n' < 0
 
   let string_of_rational (a, b) =
     string_of_int a ^ "/" ^ string_of_int b
